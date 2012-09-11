@@ -1,7 +1,7 @@
 start = records:record* { return [].concat(records) }
 
 record
-  = recname:openTag data:datum+ closeTag
+  = recname:openTag data:datum+ closeTag*
   {
     var record = {};
     var obj = {};

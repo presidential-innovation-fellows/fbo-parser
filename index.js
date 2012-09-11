@@ -126,7 +126,7 @@ module.exports = (function(){
       }
       
       function parse_record() {
-        var result0, result1, result2;
+        var result0, result1, result2, result3;
         var pos0, pos1;
         
         pos0 = pos;
@@ -144,7 +144,12 @@ module.exports = (function(){
             result1 = null;
           }
           if (result1 !== null) {
-            result2 = parse_closeTag();
+            result2 = [];
+            result3 = parse_closeTag();
+            while (result3 !== null) {
+              result2.push(result3);
+              result3 = parse_closeTag();
+            }
             if (result2 !== null) {
               result0 = [result0, result1, result2];
             } else {
