@@ -1,0 +1,8 @@
+{
+  "name": "fbo-parser",
+  "version": "0.0.1",
+  "description": "parses FBO FTP dumps",
+  "dependencies": {
+    "pegjs": "*"
+  }
+}
