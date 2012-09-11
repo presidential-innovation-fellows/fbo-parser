@@ -23,7 +23,7 @@ record
     }
 
     record[recname] = obj;
-    return record;
+    return [record];
   }
 
 openTag
@@ -59,7 +59,7 @@ validAttr
   = chars: [A-Z]+
   { return chars.join("") }
 
-notNewTag = !newTag
+notNewTag = "</EMAIL>" / !newTag
 
 newTag = "<" "/"? [A-Z]+ ">"
 

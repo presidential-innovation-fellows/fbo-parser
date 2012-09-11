@@ -186,7 +186,7 @@ module.exports = (function(){
             }
         
             record[recname] = obj;
-            return record;
+            return [record];
           })(pos0, result0[0], result0[1]);
         }
         if (result0 === null) {
@@ -526,15 +526,26 @@ module.exports = (function(){
         var result0;
         var pos0;
         
-        pos0 = pos;
-        reportFailures++;
-        result0 = parse_newTag();
-        reportFailures--;
-        if (result0 === null) {
-          result0 = "";
+        if (input.substr(pos, 8) === "</EMAIL>") {
+          result0 = "</EMAIL>";
+          pos += 8;
         } else {
           result0 = null;
-          pos = pos0;
+          if (reportFailures === 0) {
+            matchFailed("\"</EMAIL>\"");
+          }
+        }
+        if (result0 === null) {
+          pos0 = pos;
+          reportFailures++;
+          result0 = parse_newTag();
+          reportFailures--;
+          if (result0 === null) {
+            result0 = "";
+          } else {
+            result0 = null;
+            pos = pos0;
+          }
         }
         return result0;
       }
