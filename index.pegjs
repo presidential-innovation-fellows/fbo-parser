@@ -59,10 +59,10 @@ validAttr
   = chars: [A-Z]+
   { return chars.join("") }
 
-notNewTag = "</EMAIL>" / !newTag
+notNewTag = "</EMAIL>" / "<BR>" / !newTag
 
 newTag = "<" "/"? [A-Z]+ ">"
 
 validchar
-  = notNewTag val:.
-  { return val }
+  = nnt:notNewTag val:.
+  { return nnt + val }

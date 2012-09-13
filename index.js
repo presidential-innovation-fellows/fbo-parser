@@ -536,15 +536,26 @@ module.exports = (function(){
           }
         }
         if (result0 === null) {
-          pos0 = pos;
-          reportFailures++;
-          result0 = parse_newTag();
-          reportFailures--;
-          if (result0 === null) {
-            result0 = "";
+          if (input.substr(pos, 4) === "<BR>") {
+            result0 = "<BR>";
+            pos += 4;
           } else {
             result0 = null;
-            pos = pos0;
+            if (reportFailures === 0) {
+              matchFailed("\"<BR>\"");
+            }
+          }
+          if (result0 === null) {
+            pos0 = pos;
+            reportFailures++;
+            result0 = parse_newTag();
+            reportFailures--;
+            if (result0 === null) {
+              result0 = "";
+            } else {
+              result0 = null;
+              pos = pos0;
+            }
           }
         }
         return result0;
@@ -661,7 +672,7 @@ module.exports = (function(){
           pos = pos1;
         }
         if (result0 !== null) {
-          result0 = (function(offset, val) { return val })(pos0, result0[1]);
+          result0 = (function(offset, nnt, val) { return nnt + val })(pos0, result0[0], result0[1]);
         }
         if (result0 === null) {
           pos = pos0;
