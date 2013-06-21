@@ -2,8 +2,6 @@
 
 A parser for [fbo.gov's](https://www.fbo.gov/) daily FTP dumps.
 
-`ftp://ftp.fbo.gov/` has the data.
-
 ## Usage
 
 1. Grab the file(s) from `ftp://ftp.fbo.gov`
