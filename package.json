@@ -3,6 +3,6 @@
   "version": "0.0.1",
   "description": "parses FBO FTP dumps",
   "dependencies": {
-    "pegjs": "*"
+    "pegjs": "0.8.0"
   }
 }

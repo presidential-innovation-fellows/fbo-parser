@@ -6,7 +6,7 @@ record
     var record = {};
     var obj = {};
 
-    // FBO has multiple attribtes with the same key.
+    // FBO has multiple attributes with the same key.
     // We'll append a number to the key if it has already been used.
     for (i = 0, len = data.length; i < len; ++i) {
       var trySave = function(key, val, increment) {
@@ -19,7 +19,7 @@ record
         }
       }
 
-      trySave(data[i]['key'], data[i]['val']);
+      trySave(data[i][0], data[i][1]);
     }
 
     record[recname] = obj;
@@ -35,10 +35,7 @@ closeTag
 
 datum
   = key:datumName val:datumVal
-  {
-    var obj = {key: key, val: val};
-    return obj;
-  }
+  { return [key, val] }
 
 datumName
   = "<" tag:validAttr ">"
@@ -52,17 +49,17 @@ linebreaks
   = [\n\r]*
 
 validTag
-  = chars: [A-Z]+
+  = chars: [0-9a-zA-Z \"'=-]+
   { return chars.join("") }
 
 validAttr
-  = chars: [A-Z]+
+  = chars: [A-Z]i+
   { return chars.join("") }
 
-notNewTag = "</EMAIL>" / "<BR>" / !newTag
+notNewTag = "</EMAIL>" / "<BR>" / "</A>" / !newTag
 
 newTag = "<" "/"? [A-Z]+ ">"
 
 validchar
   = nnt:notNewTag val:.
-  { return nnt + val }
+  { return nnt ? nnt + val : val }
